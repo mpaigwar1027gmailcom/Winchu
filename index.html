@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes or No?</title>
+    <style>
+        /* This centers everything and makes it look nice */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f9fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Prevents scrollbars when the button runs away */
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Basic styling for both buttons */
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.1s; /* Makes the "Yes" button click feel bouncy */
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #yes-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        #no-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+            /* Position absolute allows us to move it anywhere on the screen via JS */
+            position: relative; 
+        }
+
+        #celebration-gif {
+            display: none; /* Hidden by default */
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1 id="question">Will you click Yes?</h1>
+        
+        <div id="button-container">
+            <button id="yes-btn">Yes</button>
+            <button id="no-btn">No</button>
+        </div>
+
+        <img id="celebration-gif" src="https://media.giphy.com/media/artj92V8o75VPL7AeQ/giphy.gif" alt="Celebration!">
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const question = document.getElementById('question');
+        const gif = document.getElementById('celebration-gif');
+        const buttonContainer = document.getElementById('button-container');
+
+        // --- Logic for the YES button ---
+        yesBtn.addEventListener('click', () => {
+            question.innerText = "Yay! You said Yes!";
+            buttonContainer.style.display = 'none';
+            gif.style.display = 'block';
+        });
+
+        // --- The function that makes the button run away ---
+        function dodge() {
+            noBtn.style.position = 'absolute';
+
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Listen for computer mouse hovers
+        noBtn.addEventListener('mouseover', dodge);
+
+        // Listen for mobile touchscreen taps
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // This stops the tap from registering as a click!
+            dodge();
+        });
+    </script>
+
+</body>
+</html>
