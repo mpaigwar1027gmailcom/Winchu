@@ -3,76 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yes or No?</title>
+    <title>Please say yes! 🥺</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+    
     <style>
-        /* This centers everything and makes it look nice */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f7f9fc;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Prevents scrollbars when the button runs away */
+            /* A soft pastel gradient background */
+            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
+            font-family: 'Fredoka', sans-serif; /* Using the cute font */
+            overflow: hidden;
         }
 
+        /* The white card holding the content */
         #container {
             text-align: center;
+            background-color: white;
+            padding: 40px 50px;
+            border-radius: 30px; /* Highly rounded corners */
+            box-shadow: 0 10px 25px rgba(255, 105, 135, 0.3); /* Soft pink shadow */
         }
 
         h1 {
-            color: #333;
+            color: #ff6b81;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
-        /* Basic styling for both buttons */
+        /* Styling for both buttons */
         button {
-            padding: 12px 24px;
-            font-size: 18px;
-            font-weight: bold;
+            padding: 15px 35px;
+            font-size: 22px;
+            font-family: 'Fredoka', sans-serif;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px; /* Pill-shaped buttons */
             cursor: pointer;
             margin: 10px;
-            transition: transform 0.1s; /* Makes the "Yes" button click feel bouncy */
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Bouncy effect when hovering */
+        button:hover {
+            transform: scale(1.05);
         }
 
         button:active {
             transform: scale(0.95);
         }
 
+        /* The cute YES button */
         #yes-btn {
-            background-color: #4CAF50; /* Green */
+            background-color: #ff9ff3;
             color: white;
         }
 
+        #yes-btn:hover {
+            background-color: #f368e0;
+            box-shadow: 0 5px 15px rgba(243, 104, 224, 0.4);
+        }
+
+        /* The cute NO button */
         #no-btn {
-            background-color: #f44336; /* Red */
-            color: white;
-            /* Position absolute allows us to move it anywhere on the screen via JS */
+            background-color: #c8d6e5;
+            color: #576574;
             position: relative; 
         }
 
+        /* The Celebration GIF */
         #celebration-gif {
-            display: none; /* Hidden by default */
-            max-width: 300px;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: none; /* Hidden until YES is clicked */
+            max-width: 250px;
+            margin: 20px auto 0;
+            border-radius: 20px;
         }
     </style>
 </head>
 <body>
 
     <div id="container">
-        <h1 id="question">Will you click Yes?</h1>
+        <h1 id="question">Winchu kahi ghumne chale kya? Fir kinchu....... 🥺✨</h1>
         
         <div id="button-container">
-            <button id="yes-btn">Yes</button>
-            <button id="no-btn">No</button>
+            <button id="yes-btn">Yes! 💖</button>
+            <button id="no-btn">No 🙈</button>
         </div>
 
-        <img id="celebration-gif" src="https://media.giphy.com/media/artj92V8o75VPL7AeQ/giphy.gif" alt="Celebration!">
+        <img id="celebration-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnpwam15NWwxMG8wZHVidThrYThmNTF0MHNjcWUzeGxuNnBzcDc2ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Cute Celebration!">
     </div>
 
     <script>
@@ -84,12 +106,12 @@
 
         // --- Logic for the YES button ---
         yesBtn.addEventListener('click', () => {
-            question.innerText = "Yay! You said Yes!";
-            buttonContainer.style.display = 'none';
-            gif.style.display = 'block';
+            question.innerText = "Ave ave \n pata tha mujhe haa hi bologe! \n Kupunchu 🥰";
+            buttonContainer.style.display = 'none'; // Hide the buttons
+            gif.style.display = 'block'; // Show the GIF
         });
 
-        // --- The function that makes the button run away ---
+        // --- Logic for the NO button running away ---
         function dodge() {
             noBtn.style.position = 'absolute';
 
@@ -103,12 +125,10 @@
             noBtn.style.top = randomY + 'px';
         }
 
-        // Listen for computer mouse hovers
+        // Listen for hovers and mobile taps
         noBtn.addEventListener('mouseover', dodge);
-
-        // Listen for mobile touchscreen taps
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // This stops the tap from registering as a click!
+            e.preventDefault(); 
             dodge();
         });
     </script>
